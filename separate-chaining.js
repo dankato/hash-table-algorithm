@@ -56,4 +56,3 @@ class LinkedList {
     this.length--;
   }
 }
-module.exports = LinkedList;
