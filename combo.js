@@ -1,9 +1,12 @@
-class HashMap {
+const LinkedList = require("./separate-chaining");
+
+class HashMapCombo {
   constructor(initialCapacity = 8) {
     this.length = 0;
     this._slots = [];
-    this._capacity = initialCapacity;
+    this;
   }
+
   static _hashString(string) {
     let hash = 5381;
     for (let i = 0; i < string.length; i++) {
@@ -29,6 +32,10 @@ class HashMap {
   _findSlot(key) {
     const hash = HashMap._hashString(key);
     const start = hash % this._capacity;
+
+    const list = new LinkedList();
+    list.insert(hash, key);
+    // return index
     for (let i = start; i < start + this._capacity; i++) {
       const index = i % this._capacity;
       const slot = this._slots[index];
@@ -37,21 +44,18 @@ class HashMap {
       }
     }
   }
-
-  _resize(size) {
-    const oldSlots = this._slots;
-    this._capacity = size;
-    // Reset the length = it will get rebuilt as you add the items back
-    this.length = 0;
-    this._slots = [];
-
-    for (const slot of oldSlots) {
-      if (slot !== undefined) {
-        this.set(slot.key, slot.value);
-      }
-    }
-  }
 }
 
-HashMap.MAX_LOAD_RATIO = 0.9;
-HashMap.SIZE_RATIO = 3;
+let names = [
+  { Hobbit: "Bilbo" },
+  { Hobbit: "Frodo" },
+  { Wizard: "Gandolf" },
+  { Human: "Aragon" },
+  { Elf: "Legolas" },
+  { Maiar: "The Necromancer" },
+  { Maiar: "Sauron" },
+  { RingBearer: "Gollum" },
+  { LadyOfLight: "Galadriel" },
+  { HalfElven: "Arwen" },
+  { ShepherdOfTheTrees: "Treebeard" }
+];
