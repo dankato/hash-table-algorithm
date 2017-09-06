@@ -21,35 +21,34 @@ class HashMapCombo {
     }
     const index = this._findSlot(key);
     this._slots[index] = {
-      key, value
+      key,
+      value
     };
-    console.log(key, 'print key')
+
+    console.log(key, "print key");
     console.log("current slot index", this._slots[index]);
     this.length++;
-    console.log(this.length)
   }
-
   _findSlot(key) {
     const hash = HashMapCombo._hashString(key);
     const start = hash % this._capacity;
-    let slot = this._slots[start]
+    let slot = this._slots[start];
 
     if (!slot) {
-      console.log('!slot', slot)
-      return slot = { key }
-    }
-    else if (slot.key == key) {
-      console.log('else if', slot)
+      console.log("!slot", slot);
+      return (slot = { key });
+    } else if (slot.key == key) {
+      console.log("else if", slot);
       return slot;
     } else {
       while (slot.next !== null) {
-        slot = slot.next
-        console.log('while loop', slot)
+        slot = slot.next;
+        console.log("while loop", slot);
         if (slot.key == key) {
-          return slot
+          return slot;
         }
       }
-      return slot.next = { key }
+      return (slot.next = { key });
     }
   }
 }
@@ -57,7 +56,7 @@ class HashMapCombo {
 HashMapCombo.MAX_LOAD_RATIO = 0.9;
 HashMapCombo.SIZE_RATIO = 3;
 
-const hash = new HashMapCombo()
+const hash = new HashMapCombo();
 
 let names = [
   { Hobbit: "Bilbo" },
@@ -73,5 +72,4 @@ let names = [
   { ShepherdOfTheTrees: "Treebeard" }
 ];
 
-
-console.log('TEST', hash.set('testKey', 'testValue'))
+console.log("TEST", hash.set("testKey", "testValue"));
